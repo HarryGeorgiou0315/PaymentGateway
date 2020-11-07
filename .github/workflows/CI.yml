@@ -11,9 +11,9 @@ jobs:
 
     runs-on: ubuntu-latest
     env:
-       working-directory-payment-gateway: ./PaymentGateway/PaymentGateway/PaymentGateway
-       working-directory-bank-simulator: ./PaymentGateway/PaymentGateway/AquiringBankSimulator
-       test-directory: ./PaymentGateway/PaymentGateway/PaymentGateway.Tests
+       working-directory-payment-gateway: ./PaymentGateway/PaymentGateway
+       working-directory-bank-simulator: ./PaymentGateway/AquiringBankSimulator
+       test-directory: ./PaymentGateway/PaymentGateway.Tests
         
 
     steps:
