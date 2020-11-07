@@ -14,9 +14,9 @@ namespace AquiringBankSimulator.BankSimulatorControllers
             switch (id.ToString())
             {
                 case "cf1f51d5-5cc1-42ab-94f6-a10d0aa25ef3":
-                    return Ok();
+                    return Ok(FakeBoundaryResponses.GetPaymentInfoFakeResponse.GetPaymentInfoFakeResponse1());
                 case "92752c4b-3ab4-4069-a2eb-613efda81a66":
-                    return Ok();
+                    return Ok(FakeBoundaryResponses.GetPaymentInfoFakeResponse.GetPaymentInfoFakeResponse2());
                 default:
                     return StatusCode(400, $"The request to retrieve payment information has failed with");
             }
@@ -30,7 +30,7 @@ namespace AquiringBankSimulator.BankSimulatorControllers
             {
                 return StatusCode(400, $"The request to retrieve payment information has failed with");
             }
-            return Ok();
+            return Ok(Guid.NewGuid());
         }
     }
 }
