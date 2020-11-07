@@ -15,4 +15,8 @@
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.7.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\PaymentGateway\PaymentGateway.csproj" />
+  </ItemGroup>
+
 </Project>
