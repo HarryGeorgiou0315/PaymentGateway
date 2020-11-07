@@ -18,7 +18,7 @@ namespace AquiringBankSimulator.BankSimulatorControllers
                 case "92752c4b-3ab4-4069-a2eb-613efda81a66":
                     return Ok(FakeBoundaryResponses.GetPaymentInfoFakeResponse.GetPaymentInfoFakeResponse2());
                 default:
-                    return StatusCode(400, $"The request to retrieve payment information has failed with");
+                    return StatusCode(400, $"The request to retrieve payment information for this id {id} not found.");
             }
 
         }
@@ -28,7 +28,7 @@ namespace AquiringBankSimulator.BankSimulatorControllers
         {
             if (request.NameOnCard == "test")
             {
-                return StatusCode(400, $"The request to retrieve payment information has failed with");
+                return StatusCode(400, $"The request to process payment failed.");
             }
             return Ok(Guid.NewGuid());
         }
