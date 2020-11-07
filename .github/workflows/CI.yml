@@ -10,6 +10,11 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    env:
+       working-directory-payment-gateway: ./PaymentGateway/PaymentGateway/PaymentGateway
+       working-directory-bank-simulator: ./PaymentGateway/PaymentGateway/AquiringBankSimulator
+       test-directory: ./PaymentGateway/PaymentGateway/PaymentGateway.Tests
+        
 
     steps:
     - uses: actions/checkout@v2
@@ -18,8 +23,17 @@ jobs:
       with:
         dotnet-version: 3.1.301
     - name: Install dependencies
-      run: dotnet restore
-    - name: Build
+      run: dotnet restore PaymentGateway
+      working-directory: ${{env.working-directory-payment-gateway}}
+    - name: Build Payment Gateway
       run: dotnet build --configuration Release --no-restore
-    - name: Test
+      working-directory: ${{env.working-directory-payment-gateway}}
+    - name: Install dependencies
+      run: dotnet restore BankSimulator
+      working-directory: ${{env.working-directory-bank-simulator}}
+    - name: Build Bank Simulator
+      run: dotnet build --configuration Release --no-restore
+      working-directory: ${{env.working-directory-bank-simulator}}
+    - name: Test Payment Gateway
       run: dotnet test --no-restore --verbosity normal
+      working-directory: ${{env.test-directory}}

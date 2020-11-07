@@ -4,8 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using PaymentGateway.PaymentBoundaries;
 using PaymentGateway.PaymentInterfaces;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace PaymentGateway.PaymentControllers
 {
     [Route("api/payment")]
