@@ -5,6 +5,7 @@ using PaymentGateway.PaymentModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Formatting;
 using System.Threading.Tasks;
@@ -51,12 +52,17 @@ namespace PaymentGateway.PaymentGateways
                 var response =  _httpClient.GetAsync($"api/banksimulator/{paymentId}").GetAwaiter().GetResult();
                 if (!response.IsSuccessStatusCode)
                 {
+                    if (response.StatusCode == HttpStatusCode.NotFound) throw new PaymentInformationNotFoundException();
                     throw new HttpRequestException(
                             $"Request failed with status code {response.StatusCode}");
                 }
                 var result = JsonConvert.DeserializeObject<PaymentInfo>
                                          (response.Content.ReadAsStringAsync().Result);
                 return result;
+            }
+            catch (PaymentInformationNotFoundException)
+            {
+                throw;
             }
             catch (HttpRequestException)
             {
@@ -67,5 +73,10 @@ namespace PaymentGateway.PaymentGateways
                 throw new Exception(ex.Message);
             }
         }
+    }
+
+    public class PaymentInformationNotFoundException : Exception
+    {
+        
     }
 }

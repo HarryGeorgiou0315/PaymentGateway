@@ -2,6 +2,7 @@
 using System.Net.Http;
 using Microsoft.AspNetCore.Mvc;
 using PaymentGateway.PaymentBoundaries;
+using PaymentGateway.PaymentGateways;
 using PaymentGateway.PaymentInterfaces;
 
 namespace PaymentGateway.PaymentControllers
@@ -24,6 +25,10 @@ namespace PaymentGateway.PaymentControllers
             try
             {
                 return Ok(_paymentsLogic.RetrievePaymentInfo(paymentId));
+            }
+            catch (PaymentInformationNotFoundException)
+            {
+                return NotFound($"Payment information for id {paymentId} not found.");
             }
             catch (HttpRequestException ex)
             {

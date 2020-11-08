@@ -38,7 +38,7 @@ namespace PaymentGateway.Tests.IntegrationTests
             var url = new Uri($"api/payments/{TestResources.ModelSetups.BankSimulatorInvalidPaymentId}", UriKind.Relative);
             var response = _httpClient.GetAsync(url).Result;
 
-            Assert.AreEqual(response.StatusCode, HttpStatusCode.BadRequest);
+            Assert.AreEqual(response.StatusCode, HttpStatusCode.NotFound);
         }
 
         [Test]
