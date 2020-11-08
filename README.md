@@ -1,6 +1,6 @@
 # Payment Gateway API
 
-###Overview:
+### Overview:
 - The Payment Gateway API is to be used as a middle layer between a merchant and  an acquiring bank. 
 - In this solution, the acquiring bank is a simulator API with mock responses. It is used to test the payment gateway end-to-end. For a production environment, the environment variable used for the acquiring bank API URL will be replaced with that of the real acquiring bank API. 
 	- The use of environment variable for the acquiring bank URL makes it easy to use this solution in a production environment, without any code changes
