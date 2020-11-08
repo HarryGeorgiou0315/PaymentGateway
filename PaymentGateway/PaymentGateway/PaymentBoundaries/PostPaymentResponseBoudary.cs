@@ -8,7 +8,7 @@ namespace PaymentGateway.PaymentBoundaries
 {
     public class PostPaymentResponseBoudary
     {
-        [JsonProperty("payment_id")]
-        public Guid PaymentId { get; set; }
+        [JsonProperty("paymentId")]
+        public string PaymentId { get; set; }
     }
 }

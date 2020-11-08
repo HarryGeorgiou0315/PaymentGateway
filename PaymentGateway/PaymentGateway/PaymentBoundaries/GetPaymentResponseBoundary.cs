@@ -8,23 +8,23 @@ namespace PaymentGateway.PaymentBoundaries
 {
     public class GetPaymentResponseBoundary
     {
-        [JsonProperty("payment_id")]
+        [JsonProperty("paymentId")]
         public Guid PaymentId { get; set; }
-        [JsonProperty("card_type")]
+        [JsonProperty("cardType")]
         public string CardType { get; set; }
-        [JsonProperty("first_name")]
+        [JsonProperty("firstName")]
         public string FirstName { get; set; }
-        [JsonProperty("last_name")]
+        [JsonProperty("lastName")]
         public string LastName { get; set; }
         [JsonProperty("address")]
         public string Address { get; set; }
         [JsonProperty("postcode")]
         public string Postcode { get; set; }
-        [JsonProperty("name")]
+        [JsonProperty("nameOnCard")]
         public string NameOnCard { get; set; }
-        [JsonProperty("card_number")]
-        public int CardNumber { get; set; }
-        [JsonProperty("expiry_date")]
+        [JsonProperty("cardNumber")]
+        public string CardNumber { get; set; }
+        [JsonProperty("expiryDate")]
         public string ExpiryDate { get; set; }
         [JsonProperty("amount")]
         public double Amount { get; set; }

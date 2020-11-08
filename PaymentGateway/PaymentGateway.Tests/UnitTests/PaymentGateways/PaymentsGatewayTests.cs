@@ -2,6 +2,7 @@
 using Moq.Protected;
 using Newtonsoft.Json;
 using NUnit.Framework;
+using PaymentGateway.PaymentBoundaries;
 using PaymentGateway.PaymentGateways;
 using System;
 using System.Net;
@@ -52,13 +53,13 @@ namespace PaymentGateway.Tests.UnitTests.PaymentGateways
         public void PostShouldReturnNewPaymentIdIfResponseSuccess()
         {
             var expectedResult = TestResources.ModelSetups.PostPaymentResponseBoudarySetup;
-            Setup_Http_MessageHander_Response(_messageHandler, HttpStatusCode.OK,
+            Setup_Http_MessageHander_Response(_messageHandler, HttpStatusCode.Created,
                 new StringContent(JsonConvert.SerializeObject
                             (TestResources.ModelSetups.PostPaymentResponseBoudarySetup)));
 
             var result = _classUnderTest.ProcessPayment(TestResources.ModelSetups.PostPaymentRequestBoundarySetup);
 
-            Assert.AreEqual(expectedResult.PaymentId, result.PaymentId);
+            Assert.AreEqual(expectedResult.PaymentId, JsonConvert.DeserializeObject<PostPaymentResponseBoudary>(result.PaymentId).PaymentId);
         }
 
         [Test]

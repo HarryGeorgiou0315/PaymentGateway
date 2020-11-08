@@ -6,7 +6,7 @@ using PaymentGateway.PaymentInterfaces;
 
 namespace PaymentGateway.PaymentControllers
 {
-    [Route("api/payment")]
+    [Route("api/payments")]
     [ApiController]
     public class PaymentsController : ControllerBase
     {
@@ -17,13 +17,13 @@ namespace PaymentGateway.PaymentControllers
         }
 
 
-        // GET api/payment/06ece360-d46d-487c-9616-aa0551cf0f4e
-        [HttpGet("{payment_id}")]
-        public IActionResult GetPaymentInfo([FromRoute]Guid id)
+        // GET api/payments/06ece360-d46d-487c-9616-aa0551cf0f4e
+        [HttpGet("{paymentId}")]
+        public IActionResult GetPaymentInfo([FromRoute]Guid paymentId)
         {
             try
             {
-                return Ok(_paymentsLogic.RetrievePaymentInfo(id));
+                return Ok(_paymentsLogic.RetrievePaymentInfo(paymentId));
             }
             catch (HttpRequestException ex)
             {
@@ -37,13 +37,14 @@ namespace PaymentGateway.PaymentControllers
             }
         }
 
-        // POST api/payment/
+        // POST api/payments/
         [HttpPost]
         public IActionResult PostPayment([FromBody] PostPaymentRequestBoundary request)
         {
             try
             {
-                return Ok(_paymentsLogic.ProcessPayment(request));
+                var result = _paymentsLogic.ProcessPayment(request);
+                return CreatedAtAction(nameof(GetPaymentInfo), new { paymentId = result.PaymentId }, result);
             }
             catch (HttpRequestException ex)
             {

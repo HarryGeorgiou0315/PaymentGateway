@@ -1,0 +1,32 @@
+version: "3.2"
+
+services:
+  payment-gateway-api:
+    image: payment-gateway-api
+    build:
+      context: PaymentGateway/
+      dockerfile: ./Dockerfile
+    ports:
+      - 3000:3000
+    environment:
+      - AQUIRING_BANK_URL=http://aquiring-bank-simulator:80
+    links:
+      - aquiring-bank-simulator
+
+  payment-gateway-api-test:
+    image: payment-gateway-api-test
+    build:
+      context: .
+      dockerfile: PaymentGateway.Tests/Dockerfile
+    environment:
+      - AQUIRING_BANK_URL=http://aquiring-bank-simulator:80
+    links:
+      - aquiring-bank-simulator
+  aquiring-bank-simulator:
+    image: aquiring-bank-simulator
+    build:
+      context: AquiringBankSimulator/
+      dockerfile: ./Dockerfile
+    ports:
+      - 3001:80
+    

@@ -1,8 +1,6 @@
 ﻿using NUnit.Framework;
 using PaymentGateway.Factories;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace PaymentGateway.Tests.UnitTests.Factories
 {

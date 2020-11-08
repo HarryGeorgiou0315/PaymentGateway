@@ -24,18 +24,15 @@ namespace PaymentGateway.PaymentGateways
         {
             try
             {
-                var uri = Environment.GetEnvironmentVariable("AQUIRING_BANK_URL");
                 var content = new ObjectContent<PostPaymentRequestBoundary>(request, new JsonMediaTypeFormatter());
 
-                var response =  _httpClient.PostAsync(uri, content).GetAwaiter().GetResult();
+                var response =  _httpClient.PostAsync("api/banksimulator", content).GetAwaiter().GetResult();
                 if (!response.IsSuccessStatusCode)
                 {
                     throw new HttpRequestException(
                             $"Request failed with status code {response.StatusCode}");
                 }
-                var result = JsonConvert.DeserializeObject<PostPaymentResponseBoudary>
-                                         (response.Content.ReadAsStringAsync().Result);
-                return result;
+                return new PostPaymentResponseBoudary { PaymentId =response.Content.ReadAsStringAsync().Result};
             }
             catch (HttpRequestException)
             {
@@ -51,8 +48,7 @@ namespace PaymentGateway.PaymentGateways
         {
             try
             {
-                var uri = Environment.GetEnvironmentVariable("AQUIRING_BANK_URL");
-                var response =  _httpClient.GetAsync($"{uri}/{paymentId}").GetAwaiter().GetResult();
+                var response =  _httpClient.GetAsync($"api/banksimulator/{paymentId}").GetAwaiter().GetResult();
                 if (!response.IsSuccessStatusCode)
                 {
                     throw new HttpRequestException(

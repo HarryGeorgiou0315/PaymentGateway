@@ -1,18 +1,20 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using Newtonsoft.Json;
+using PaymentGateway.Validators;
 
 namespace PaymentGateway.PaymentBoundaries
 {
     public class PostPaymentRequestBoundary
     {
-        [JsonProperty("card_type")]
+       
         [Required (ErrorMessage = "Failed to supply required information")]
+        [JsonProperty("cardType")]
         public string CardType { get; set; }
-        [JsonProperty("first_name")]
+        [JsonProperty("firstName")]
         [Required(ErrorMessage = "Failed to supply required information")]
         public string FirstName { get; set; }
-        [JsonProperty("last_name")]
+        [JsonProperty("lastName")]
         [Required(ErrorMessage = "Failed to supply required information")]
         public string LastName { get; set; }
         [JsonProperty("address")]
@@ -22,14 +24,14 @@ namespace PaymentGateway.PaymentBoundaries
         [JsonProperty("postcode")]
         [Required(ErrorMessage = "Failed to supply required information")]
         public string Postcode { get; set; }
-        [JsonProperty("name")]
+        [JsonProperty("nameOnCard")]
         [Required(ErrorMessage = "Failed to supply required information")]
         public string NameOnCard { get; set; }
-        [JsonProperty("card_number")]
-        [CreditCard]
+        [JsonProperty("cardNumber")]
+        [CardNumberValidator(ErrorMessage = "Malformed card number")]
         [Required(ErrorMessage = "Failed to supply required information")]
-        public int CardNumber { get; set; }
-        [JsonProperty("expiry_date")]
+        public string CardNumber { get; set; }
+        [JsonProperty("expiryDate")]
         [Required(ErrorMessage = "Failed to supply required information")]
         public string ExpiryDate { get; set; }
         [JsonProperty("amount")]
@@ -39,8 +41,7 @@ namespace PaymentGateway.PaymentBoundaries
         [Required(ErrorMessage = "Failed to supply required information")]
         public string Currency { get; set; }
         [JsonProperty("cvv")]
-        [MinLength(3, ErrorMessage = "Invalid card security number")]
-        [MaxLength(3, ErrorMessage = "Invalid card security number")]
+        [CVVValidator(ErrorMessage = "Invalid card security number")]
         [Required(ErrorMessage = "Failed to supply required information")]
         public int CVV { get; set; }
     }

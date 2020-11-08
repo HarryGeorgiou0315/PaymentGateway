@@ -14,6 +14,7 @@
       "launchBrowser": true,
       "launchUrl": "paymentgateway",
       "environmentVariables": {
+        "AQUIRING_BANK_URL": "http://127.0.0.1:3001",
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },

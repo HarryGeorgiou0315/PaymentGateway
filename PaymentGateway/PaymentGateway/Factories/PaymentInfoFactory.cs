@@ -11,7 +11,7 @@ namespace PaymentGateway.Factories
             {
                 Address = paymentInfo.BillingInfo.Address,
                 Amount = paymentInfo.Amount,
-                CardNumber = paymentInfo.CardDetails.CardNumber,
+                CardNumber = Helpers.PaymentHelper.MaskCardNumber(paymentInfo.CardDetails.CardNumber),
                 CardType = paymentInfo.CardDetails.CardType,
                 Currency = paymentInfo.Currency,
                 CVV = paymentInfo.CardDetails.CVV,

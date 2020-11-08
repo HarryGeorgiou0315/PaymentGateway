@@ -5,9 +5,7 @@ using PaymentGateway.PaymentBoundaries;
 using PaymentGateway.PaymentControllers;
 using PaymentGateway.PaymentInterfaces;
 using System;
-using System.Collections.Generic;
 using System.Net.Http;
-using System.Text;
 
 namespace PaymentGateway.Tests.UnitTests.PaymentControllers
 {
@@ -81,9 +79,9 @@ namespace PaymentGateway.Tests.UnitTests.PaymentControllers
             _paymentsLogicMoq.Setup(x => x.ProcessPayment(TestResources.ModelSetups.PostPaymentRequestBoundarySetup))
                                           .Returns(TestResources.ModelSetups.PostPaymentResponseBoudarySetup);
 
-            var result = _classUnderTest.PostPayment(TestResources.ModelSetups.PostPaymentRequestBoundarySetup) as OkObjectResult;
+            var result = _classUnderTest.PostPayment(TestResources.ModelSetups.PostPaymentRequestBoundarySetup) as CreatedAtActionResult;
 
-            Assert.AreEqual(200, result.StatusCode);
+            Assert.AreEqual(201, result.StatusCode);
         }
 
 
